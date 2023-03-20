@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Worlds with Cylinders</title>
+</head>
+<body>
+    <h1>Virtual Worlds w/ Cylinders</h1>
+    <p>
+        Project 1:
+        <a href=""
+    </p>
+    <p>
+        PROG 1 / April 11 2021
+    </p>
+    <!-- DESCRIPTION -->
+    <h2>Description:</h2>
+    <p>
+        A program that utilizes VSHADERS, FSHADERS, and buffers in order to sketch out a cylinder polygon given 
+        the user input to calculate coordiantes. When the program runs and is given an N value input, it will
+        draw a 3D cylinder in a 2D perspective. Depending if the end caps are declared to be drawn by the checkbox
+        on the webpage, the program will draw a cylinder either with or without end caps. 
+    </p>
+    <p>
+        What was implemented were functions that saved the polygon and coordinates of the n polygon that the
+        user asked for. Other functions implemented were functions to properly format the downloadable files,
+        account for whether the user wants end caps drawn, update the most recent coordinates and polygons for
+        saving, calculate the points for both coordinates and indices, and draw the n polygon. Drawing the coordinates 
+        of the polygon utilized VSHADERS and FSHADERS, along with calculations of the Unit Circle, in order to sketch
+        out the skeleton of the polygon.
+    </p>
+    <!-- LINKS -->
+    <h2>Links:</h2>
+    <p><a href="driver.html">Program / Driver</a></p>
+    <p><a href="asg1.js">Javascript / asg1.js</a></p>
+    <!-- GUIDE TO USE PROGRAM -->
+    <h2>Guide to Use Program:</h2>
+    <p>
+        The user types in a number into the textbox to create a polygon that has N sides. Users can click on
+        the checkbox next to the textbox to decide whether they want to have the end caps of the cylinders drawn
+        or not. Once the user has decided, they may draw the polygon by clicking "Draw" to observe the output.
+    </p>
+    <p>
+        Below the inputs are options to save files that contain coordinates and polygons. Each textbox is associated with the 
+        name of the file and a button to save. Users can name the file they want to save and they can click on either 
+        box to save the contents of the coordinates or the polygons.
+    </p>
+    <!-- ISSUES -->
+    <h2>Issues:</h2>
+    <p>
+        * A file cannot be saved if there is no output currently on the canvas. The user must draw something in order 
+        for the contents to be saved.
+    </p>
+    <p>
+        * Once a file has been saved, the canvas will reset and if the user wants both .coor and .poly files, they must 
+        reinput their value and download the other file. (Ex./ User types in N = 3 and saves .coor. The canvas will reset
+        and must reinput N = 3 to save .poly.)
+    </p>
+    <!-- EXAMPLE OUTPUTS -->
+    <h2>Example Outputs:</h2>
+    <p>N = 12 / End Caps = false</p>
+    <img src="cyli12noCap.PNG" alt="Cylinder12noCap" width="400" height="400">
+
+    <p>N = 5 / End Caps = true</p>
+    <img src="cyli5cap.PNG" alt="Cylinder5cap" width="400" height="400">
+
+    <p>N = 3 / End Caps = false</p>
+    <img src="cyli3noCap.PNG" alt="Cylinder3noCap" width="400" height="400">
+
+    <p>N = 17 / End Caps = true</p>
+    <img src="cyli17cap.PNG" alt="Cylinder17cap" width="400" height="400">
+</body>
+</html>

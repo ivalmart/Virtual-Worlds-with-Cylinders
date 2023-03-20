@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE 160 / Assignment 2</title>
+</head>
+<body>
+    <h1>CSE 160 / Assignment 2 / Prog 2</h1>
+    <p>
+        Ivan Martinez-Arias / ivalmart@ucsc.edu
+    </p>
+    <p>
+        PROG 2 / April 26 2021
+    </p>
+    <!-- DESCRIPTION -->
+    <h2>Description:</h2>
+    <p>
+        A program that contains a 3D environment where users are able to create colored cylinders with N sides 
+        and are able to perform transformations on each cylinder object utilizing Matrix Transformations. The 
+        possible transformations users can choose from are Translations, Rotations, and Scaling.<br>
+
+        Each side of the cylinder object contains Normals to perform Flat Shading depending where the light source 
+        is. Depending on the user input, users can render the objects placed onto the WebGL Canvas and switch 
+        between Flat Shading or Wireframes through a toggle button.<br>
+
+        The program starts with a Mallet Object created already in the main() function, 
+        having 2 cylinders connected and transformed individually.
+    </p>
+    
+    <!-- LINKS -->
+    <h2>Links:</h2>
+    <p><a href="driver.html">Program / Driver</a></p>
+    <p><a href="asg2.js">Javascript / asg2.js</a></p>
+    <p><a href="cylinder.js">Javascript / cylinder.js</a></p>
+
+    <!-- GUIDE TO USE PROGRAM -->
+    <h2>Guide to Use Program:</h2>
+    <u>Creating / Controlling Cylinders</u>
+    <p>
+        - To create a cylinder, you must input an N number that will represent the number of sides for the cylinder. 
+        Below the number input is a Color Box, where the user can decide what color shading the user wants on their 
+        created cylidner. Once the user has decided on N and the Color, they can click on "Add" to create the new cylinder.<br>
+        - To control a specific cylinder, users can click on the drop down menu containing all created cylinders and click 
+        on the numbered cylinder they would like to control.<br>
+        - To make every cylinder into a wireframe rather than completely filled out, users can use the "Wireframe" checkbox 
+        to view the wireframes of each cylinder.
+    </p>
+    <u>Transformations of Cylinders</u>
+    <p>
+       - Users are able to transform each Cylinder Object through 3 options: Translate, Rotate, and Scale. Each transformation 
+       has 3 slides that are assigned to each axis on the 3D plane. Each slider performs the appropriate transformation depending 
+       on which axis it is being used on.
+    </p>
+    
+    <!-- ISSUES -->
+    <h2>Issues:</h2>
+    <p>
+        <b><u>NOTE:</u></b> I am not 100% certain whether these are truly issues or not on the program, however they are 
+        things that I have noticed.<br>
+        * Depending on the perspective of the object, when scaling the z-axis of the cylinder the brightness/lighting of the 
+        bottom or top of the cylinder dims down when increasing the z-axis. The opposite is true when decreasing the z-axis 
+        as it will become brighter.<br>
+        * When translating the z-axis to the max on either side of the slider, the object will clip through the canvas and show 
+        the insides of the object.
+    </p>
+    
+    <!-- EXAMPLE OUTPUTS -->
+    <h2>Example Outputs:</h2>
+    <!-- Mallet Images -->
+    <p><u>Mallet</u><br>Cylinder1: n = 24 sides (Handle) / Cylinder2: n = 13 sides (Head)</p>
+        <img src="images/mallet.PNG" alt="MalletImg" width="400" height="400">
+    <p><u>Mallet Wireframes</u></p>
+        <img src="images/malletWireframe.PNG" alt="MalletWireframeImg" width="400" height="400">
+    
+    <!-- Cooler Mallet Images -->
+    <p><u>Cooler Mallet</u><br>
+        Cylinder1: n = 20 (Handle) / Cylinder2: n = 25 (Head Base)<br>
+        Cylinder 3 & 4: n = 12 (Red Around Head) / Cylinder 5 & 6: n = 8 (Side Ends of the Head)
+    </p>
+        <img src="images/coolerMallet.PNG" alt="CoolerMalletImg" width="400" height="400">
+    <p><u>Cooler Mallet Wireframes</u></p>
+        <img src="images/coolerMalletWireframe.PNG" alt="CoolerMalletWireframeImg" width="400" height="400">
+    
+    <!-- Sword Images -->
+    <p><u>Sword</u><br>Cylinder1: n = 12 (Handle) / Cylinder2: n = 360 (Guard) / Cylinder3: n = 3 (Blade)</p>
+        <img src="images/swordModel.PNG" alt="SwordImg" width="400" height="400">
+    <p><u>Sword Wireframes</u></p>
+        <img src="images/swordModelWireframe.PNG" alt="SwordImgWireframeImg" width="400" height="400">
+</body>
+</html>

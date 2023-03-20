@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE 160 / Assignment 4</title>
+</head>
+<body>
+    <h1>CSE 160 / Assignment 4 / Prog 4</h1>
+    <p>
+        Ivan Martinez-Arias / ivalmart@ucsc.edu
+    </p>
+    <p>
+        PROG 4 / May 23 2021
+    </p>
+    <!-- DESCRIPTION -->
+    <h2>Description:</h2>
+    <p>
+        A program where users are placed into a pre-rendered world of objects formed by sphere and cylinders where users are able 
+        to explore around the wvirtual world through a Perspective Viewpoint, as well as through an Orthographic Viewpoint. The user 
+        is able to use Camera Controls to explore and maneuver around the virtual world, as well as use a created animation to 
+        move around the center of the object world. Users are also able zoom in and out of the world to have a different Field of 
+        View when observing the virtual world normally.
+    </p>
+    
+    <!-- LINKS -->
+    <h2>Links:</h2>
+    <p><a href="driver.html">Program / Driver</a></p>
+    <p><a href="asg4.js">Javascript / asg4.js</a></p>
+    <p><a href="camera.js">Javascript / camera.js</a></p>
+    <p><a href="models/cylinder.js">Javascript / cylinder.js</a></p>
+    <h2>Other Resources from Lab:</h2>
+    <p><a href="models/model.js">Javascript / model.js</a></p>
+    <p><a href="models/sphere.js">Javscript / sphere.js</a></p>
+
+    <!-- GUIDE TO USE PROGRAM -->
+    <h2>Guide to Use Program:</h2>
+    <u>Camera Controls</u>
+    <p>
+        Controls are above the Canvas with instructions. To move the camera's positions, use WASD controls to move forward, backwards 
+        and sideways. To move the camera in place, use IJKL controls to tilt up and down, as well as pan left and right.
+    </p>
+    <u>Zooming In and Out</u>
+    <p>
+        Below the Canvas contains a slider for zooming in and out of perspective. Users are able to adjust how far or near they want 
+        to view the world.
+    </p>
+    <u>Resetting Camera Position</u>
+    <p>
+        Pressing the "Reset Camera" button will reset the camera's position to where it originally starts when the program is 
+        opened.
+    </p>
+    <u>Switching Between Perspective and Orthographic Projections</u>
+    <p>
+        Pressing the "Switch Projection" button will change the projection of the camera towards the virtual world. Users are able 
+        to observe which projection they are currently on by the text below the button that what the current projection is.
+    </p>
+    <u>Animation</u>
+    <p>
+        Pressing the "Animation" button will turn on the camera animation to rotate around the center of the object's world. 
+        In order to turn off the animation, the user must press the "Animation" button once again to stop the animation and will 
+        reset the camera's position.
+    </p>
+    <u>Creating / Controlling Cylinders</u>
+    <p>
+        - To create a cylinder, you must input an N number that will represent the number of sides for the cylinder. 
+        Below the number input is a Color Box, where the user can decide what color shading the user wants on their 
+        created cylidner. Once the user has decided on N and the Color, they can click on "Add" to create the new cylinder.<br>
+        - To control a specific cylinder, users can click on the drop down menu containing all created cylinders and click 
+        on the numbered cylinder they would like to control.<br>
+        - To make every cylinder into a wireframe rather than completely filled out, users can use the "Wireframe" checkbox 
+        to view the wireframes of each cylinder.
+    </p>
+    <u>Transformations of Cylinders</u>
+    <p>
+       - Users are able to transform each Cylinder Object through 3 options: Translate, Rotate, and Scale. Each transformation 
+       has 3 slides that are assigned to each axis on the 3D plane. Each slider performs the appropriate transformation depending 
+       on which axis it is being used on.
+    </p>
+    <u>Choosing Type of Shading / Updating the Canvas</u>
+    <p>
+        Below the user input of the cylinders, there is a Shading List that contains three possible choices: 
+        Flat Shading, Smooth Shading, and Wireframes. Choosing one from the list will adjust how each object on the 
+        canvas will be outputted as. To update the canvas, click on "Update" after selecting the desired shading choice.
+    </p>
+    <u>Toggling On/Off Light Sources</u>
+    <p>
+        Below the table to transform cylinders around are two toggle switches that are ON at the start. Each switch 
+        corresponds to the appropriate light source labeled. To turn each specific light source ON/OFF, click on the 
+        toggle switch as such.
+        <b><u>Note:</u> If both the switches are OFF, the objects will only have Ambient Lighting.</b>
+    </p>
+    <u>Moving the Point Light Source</u>
+    <p>
+        The Point Light Source is represented as the small yellow sphere on the bottom part of the canvas. 
+        If the Point Light Source is toggled to be on, the user can adjust the point light source by adjusting 
+        which axes the user wants to move towards. 
+    </p>
+    <!-- ISSUES -->
+    <h2>Issues:</h2>
+    <p>
+        * When tilting all the way up or down, the perspective of the world flips upside down. Continuing to rotate in 
+        the same direction will flip the world once again and the world will be in the normal perspective.<br>
+        * Increasing the zoom value past 20 or decreasing the zoom value past -10 seems to flip the world upside down and 
+        mirror the virtual world. Might be how the zoom value is calculated when dividing by 10 however I was not sure 
+        how to fix it. 
+    </p>
+    
+    <!-- EXAMPLE OUTPUTS -->
+    <h2>Example Outputs:</h2>
+    <p>
+        <u>Perspective Projection:</u>
+    </p>
+        <img src="images/perspectiveProjection.PNG" width="300" height="400">
+
+    <p>
+        <u>Orthographic Projection:</u>
+    </p>
+        <img src="images/orthographicProjection.PNG" width="300" height="400">
+    
+    <p>
+        <u>Zoomed In:</u>
+    </p>
+        <img src="images/zoomIn.PNG" width="300" height="400">
+    
+    <p>
+        <u>Zoomed Out:</u>
+    </p>
+        <img src="images/zoomOut.PNG" width="300" height="400">
+</body>
+</html>

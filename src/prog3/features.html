@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE 160 / Assignment 3</title>
+</head>
+<body>
+    <h1>CSE 160 / Assignment 3 / Prog 3</h1>
+    <p>
+        Ivan Martinez-Arias / ivalmart@ucsc.edu
+    </p>
+    <p>
+        PROG 3 / May 9 2021
+    </p>
+    <!-- DESCRIPTION -->
+    <h2>Description:</h2>
+    <p>
+        A program that contains a 3D environment where objects created by the user can have different types of 
+        shading: Flat Shading, Wireframes, and Smooth Shading. Smooth Shading is done through Gouraud Shading, 
+        utilizing all three ambient, diffuse, and specular lighting to present a light source hitting the surfaces 
+        of each object cylinder.
+        <br>
+
+        Inside the Cylinder Class Object contains two sets of normals for each appropriate shading option. Smooth 
+        normals for smooth shading were calculated through the sum of each vertex normal on each cylinder face. 
+        <br>
+
+        In the world contains two light sources where one light source is only one directional 
+        while the other light source can be controlled by the user. Each light source provides appropriate lighting 
+        effects using ambient and specular lighting, where ambient lighting provides a softer appearance of the object 
+        while specular lighting provides the glossiness part of the object where the light peaks the most. 
+    </p>
+    
+    <!-- LINKS -->
+    <h2>Links:</h2>
+    <p><a href="driver.html">Program / Driver</a></p>
+    <p><a href="asg3.js">Javascript / asg3.js</a></p>
+    <p><a href="models/cylinder.js">Javascript / cylinder.js</a></p>
+    <h2>Other Resources from Lab:</h2>
+    <p><a href="models/model.js">Javascript / model.js</a></p>
+    <p><a href="models/sphere.js">Javscript / sphere.js</a></p>
+
+    <!-- GUIDE TO USE PROGRAM -->
+    <h2>Guide to Use Program:</h2>
+    <u>Creating / Controlling Cylinders</u>
+    <p>
+        - To create a cylinder, you must input an N number that will represent the number of sides for the cylinder. 
+        Below the number input is a Color Box, where the user can decide what color shading the user wants on their 
+        created cylidner. Once the user has decided on N and the Color, they can click on "Add" to create the new cylinder.<br>
+        - To control a specific cylinder, users can click on the drop down menu containing all created cylinders and click 
+        on the numbered cylinder they would like to control.<br>
+        - To make every cylinder into a wireframe rather than completely filled out, users can use the "Wireframe" checkbox 
+        to view the wireframes of each cylinder.
+    </p>
+    <u>Transformations of Cylinders</u>
+    <p>
+       - Users are able to transform each Cylinder Object through 3 options: Translate, Rotate, and Scale. Each transformation 
+       has 3 slides that are assigned to each axis on the 3D plane. Each slider performs the appropriate transformation depending 
+       on which axis it is being used on.
+    </p>
+    <u>Choosing Type of Shading / Updating the Canvas</u>
+    <p>
+        Below the user input of the cylinders, there is a Shading List that contains three possible choices: 
+        Flat Shading, Smooth Shading, and Wireframes. Choosing one from the list will adjust how each object on the 
+        canvas will be outputted as. To update the canvas, click on "Update" after selecting the desired shading choice.
+    </p>
+    <u>Toggling On/Off Light Sources</u>
+    <p>
+        Below the table to transform cylinders around are two toggle switches that are ON at the start. Each switch 
+        corresponds to the appropriate light source labeled. To turn each specific light source ON/OFF, click on the 
+        toggle switch as such.
+        <b><u>Note:</u> If both the switches are OFF, the objects will only have Ambient Lighting.</b>
+    </p>
+    <u>Moving the Point Light Source</u>
+    <p>
+        The Point Light Source is represented as the small yellow sphere on the bottom part of the canvas. 
+        If the Point Light Source is toggled to be on, the user can adjust the point light source by adjusting 
+        which axes the user wants to move towards. 
+    </p>
+    <!-- ISSUES -->
+    <h2>Issues:</h2>
+    <p>
+        * At the start of the program, there is a weird light source at the bottom left that is noticeable 
+        on the handle of the mallet. Not sure what is causing the problem however it disappears when one of the light 
+        source switches has been toggled.
+        <br>
+        * The normals of the end caps seem to be inverted when applying flat shading and viewing the top left cap 
+        of the mallet head cylinder. Before it was only with smooth normals however it is now occurring for flat normals.
+        <br>
+        * When rotating the z-axis head of the mallet on smooth shading, the colors/lighting changes while the sides/faces 
+        remain the same.
+        <br>
+        * Not 100% sure if this is an issue to care about but something to note. The sphere that represents the point 
+        light source seems to only glow when there is directional light and never when the point light is enabled.
+        <br>
+    </p>
+    
+    <!-- EXAMPLE OUTPUTS -->
+    <h2>Example Outputs:</h2>
+    <p>
+        <u>Flat Shading with only Point Light:</u>
+    </p>
+        <img src="images/exampleFlatShading.PNG" width="300" height="400">
+
+    <p>
+        <u>Smooth Shading with only Directional Light:</u>
+    </p>
+        <img src="images/exampleSmoothShading.PNG" width="300" height="400">
+    
+    <p>
+        <u>Smooth Shading with Both Light Sources:</u>
+    </p>
+        <img src="images/exampleBothLightSources.PNG" width="300" height="400">
+    
+    <p>
+        <u>Wireframes:</u>
+    </p>
+        <img src="images/exampleWireframes.PNG" width="300" height="400">
+
+    <p>
+        <u>Ambient Lighting / Both Light Sources are Off</u>
+    </p>
+        <img src="images/exampleNoLighting.PNG" width="300" height="400">
+</body>
+</html>

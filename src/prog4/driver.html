@@ -1,0 +1,212 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>PROG 4</title>
+
+        <!-- Load external libs -->
+        <script src="lib/cuon-matrix-cse160.js"></script>
+        <script src="lib/cuon-utils.js"></script>
+        <script src="lib/webgl-debug.js"></script>
+        <script src="lib/webgl-utils.js"></script>
+
+        <!-- Load internal libs -->
+        <script src="models/model.js"></script>
+        <script src="models/sphere.js"></script>
+        <script src="models/cylinder.js"></script>
+        <script src="camera.js"></script>
+
+        <!-- Load main -->
+        <script src="asg4.js"></script>
+        
+        <style>
+            /* The switch - the box around the slider */
+            .switch {
+                position: relative;
+                display: inline-block;
+                width: 45px;
+                height: 20px;
+            }
+
+            /* Hide default HTML checkbox */
+            .switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+
+            /* The slider */
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 12px;
+                width: 12px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
+
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
+
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
+
+            /* Rounded sliders */
+            .slider.round {
+            border-radius: 34px;
+            }
+
+            .slider.round:before {
+            border-radius: 50%;
+            }
+        </style>
+
+    </head>
+
+    <body onload="main()">
+        <!-- Instructions for Camera -->
+        <u><b>Camera Instructions:</b></u>
+        <div style="width: 400px; display: table;">
+            <div style="display: table-row; height: 100px;">
+                <div style="width: 50%; display: table-cell;">
+                    <u>Controls:</u><br>
+                    Move Left: A<br>
+                    Move Right: D<br>
+                    Move Forwards: W<br>
+                    Move Backwards: S<br>
+                </div>
+                <div style="display: table-cell;"> 
+                    <u>Rotation: +/- 30 Degrees</u><br>
+                    Pan Left: J<br>
+                    Pan Right: L<br>
+                    Tilt Up: I<br>
+                    Tilt Down: K<br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <canvas id="canvas" width="400" height="400"></canvas>
+
+        <!-- Zooming Slider -->
+        <br><label>Zoom In/Out:</label>
+        <input id="zoomSlider" value="0" type="range" min="-9" max="15" oninput="onZoomInput(this.value)"></input>
+
+        <!-- Reset Camera -->
+        <button onclick="resetCamera()">Reset Camera</button>
+        <!-- Toggle Perspectives -->
+        <button onclick="switchProjectionText()">Switch Projection</button>
+        <div id="projection">Current Projection: Perspective</div>
+        <script>
+            // Switches the text to show current projection
+            function switchProjectionText() {
+                var x = document.getElementById("projection");
+                if (x.innerHTML === "Current Projection: Perspective") {
+                    x.innerHTML = "Current Projection: Orthographic";
+                    switchCameraPerspective("orthographic");
+                } else {
+                    x.innerHTML = "Current Projection: Perspective";
+                    switchCameraPerspective("perspective");
+                }
+            }
+        </script>
+
+        <!-- Start Animation Button -->
+        <button onclick="requestAnimation()">Animate</button>
+
+        <!-- Create Cylinder -->
+        <br>
+        <caption style="text-align:left"><u>Create Cylinder:</u></caption>
+        <table>
+            <td>N:<input type="number" id="nValue" placeholder="Min. 3" style="width: 60px"></input></td>
+            <td>Color:<input type="color" id="cylinderColor" style="width: 60px"></input></td>
+            <td><button type="button" onclick="addCylinder()">Add Cylinder</button></td>
+        </tr>
+        </table>
+        <!-- Types of Shading List -->
+        <label for="shading">Type of Shading:</label>
+        <select name="shades" id="shading">
+            <option value="flatShade">Flat Shading</option>
+            <option value="smoothShade">Smooth Shading</option>
+            <option value="wireframe">Wireframes</option>
+        </select>
+        <button type="button" onclick="updateShaders()">Update</button>
+        <br>
+
+        <!----- Transformations ----->
+        <!-- Transform Cylinder -->
+        <br>
+
+          <caption style="text-align:left">Transform Cylinder:</caption>
+          <select id="cylSelect" style="width: 90px">
+            <option selected disabled>Empty</option>
+          </select>
+        <table>
+          <tr>
+            <td>Translate:</td>
+            <td>x: <input type="range" min="-100" max="100" oninput="onChangeTranslateX(this.value)"></input></td>
+            <td>y: <input type="range" min="-100" max="100" oninput="onChangeTranslateY(this.value)"></input></td>
+            <td>z: <input type="range" min="-100" max="100" oninput="onChangeTranslateZ(this.value)"></input></td>
+          </tr>
+
+          <tr>
+            <td>Rotate:</td>
+            <td>x: <input type="range" min="0" max="360" oninput="onChangeRotateX(this.value)"></input></td>
+            <td>y: <input type="range" min="0" max="360" oninput="onChangeRotateY(this.value)"></input></td>
+            <td>z: <input type="range" min="0" max="360" oninput="onChangeRotateZ(this.value)"></input></td>
+          </tr>
+
+          <tr>
+            <td>Scale:</td>
+            <td>x: <input type="range" min="1" max="200" oninput="onChangeScaleX(this.value)"></input></td>
+            <td>y: <input type="range" min="1" max="200" oninput="onChangeScaleY(this.value)"></input></td>
+            <td>z: <input type="range" min="1" max="200" oninput="onChangeScaleZ(this.value)"></input></td>
+          </tr>
+        </table>
+        <br>
+
+        <!----- Toggle Light Sources ----->
+        <table>
+            <td>
+                Point Light Source:
+                <label class="switch">
+                    <input class="togglePointLight" type="checkbox" checked onclick="updatePointLight(this)">
+                    <span class="slider round"></span>
+                </label>
+                | Directional Light Source:
+                <label class="switch">
+                    <input class="toggleDirectionalLight" type="checkbox" checked onclick="updateDirectionalLight(this)">
+                    <span class="slider round"></span>
+                </label>
+            </td>    
+        </table>
+
+        <br> <!----- Point Light Source ----->
+        Point Light Source:<br>
+        x<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateX(this.value)"></input>
+        y<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateY(this.value)"></input>
+        z<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateZ(this.value)"></input>
+    </body>
+</html>

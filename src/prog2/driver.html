@@ -1,0 +1,87 @@
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>ASG 2</title>
+
+        <!-- Load external libs -->
+        <script src="lib/cuon-matrix-cse160.js"></script>
+        <script src="lib/cuon-utils.js"></script>
+        <script src="lib/webgl-debug.js"></script>
+        <script src="lib/webgl-utils.js"></script>
+
+        <!-- Load internal libs -->
+        <script src="models/model.js"></script>
+        <script src="models/cylinder.js"></script>
+        <!--<script src="classmate_cylinder.js"></script>-->
+        <script src="models/sphere.js"></script>
+
+        <!-- Load main -->
+        <!--<script src="asg2.js"></script>-->
+        <script src="asg2 _testWithAsg3.js"></script>
+    </head>
+
+    <body onload="main()">
+        <canvas id="canvas" width="400" height="400"></canvas>
+
+        <!-- Create Cylinder -->
+        <br></br>
+        <table>
+          <caption style="text-align:left">Create Cylinder:</caption>
+          <tr>
+            <td>N:</td>
+            <td><input type="number" id="nValue" style="width: 60px"></input></td>
+          </tr>
+          <tr>
+            <td>Color:</td>
+            <td><input type="color" id="cylinderColor" style="width: 60px"></input></td>
+          </tr>
+          <tr>
+              <td><button type="button" onclick="addCylinder()">Add</button></td>
+              <td>Wireframe: <input type="checkbox" onclick="adjustWireframeCondition(this)"></td>
+          </tr>
+        </table>
+
+        <!-- Transform Cylinder -->
+        <br>
+        <table>
+          <caption style="text-align:left">Transform Cylinder:</caption>
+          <tr>
+            <td>
+                <select id="cylSelect" style="width: 90px">
+                    <option selected disabled>Empty</option>
+                </select>
+            </td>
+            <td>Wireframe: <input type="checkbox" onclick="adjustWireframeCondition(this)"></td>
+          </tr>
+
+          <tr>
+            <td>Translate:</td>
+            <td>x: <input type="range" min="-100" max="100" oninput="onChangeTranslateX(this.value)"></input></td>
+            <td>y: <input type="range" min="-100" max="100" oninput="onChangeTranslateY(this.value)"></input></td>
+            <td>z: <input type="range" min="-100" max="100" oninput="onChangeTranslateZ(this.value)"></input></td>
+          </tr>
+
+          <tr>
+            <td>Rotate:</td>
+            <td>x: <input type="range" min="0" max="360" oninput="onChangeRotateX(this.value)"></input></td>
+            <td>y: <input type="range" min="0" max="360" oninput="onChangeRotateY(this.value)"></input></td>
+            <td>z: <input type="range" min="0" max="360" oninput="onChangeRotateZ(this.value)"></input></td>
+          </tr>
+
+          <tr>
+            <td>Scale:</td>
+            <td>x: <input type="range" min="1" max="200" oninput="onChangeScaleX(this.value)"></input></td>
+            <td>y: <input type="range" min="1" max="200" oninput="onChangeScaleY(this.value)"></input></td>
+            <td>z: <input type="range" min="1" max="200" oninput="onChangeScaleZ(this.value)"></input></td>
+          </tr>
+        </table>
+
+        <br> <!----- Point Light Source ----->
+        Point Light Source:<br>
+        x<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateX(this.value)"></input>
+        y<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateY(this.value)"></input>
+        z<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateZ(this.value)"></input>
+
+    </body>
+</html>
