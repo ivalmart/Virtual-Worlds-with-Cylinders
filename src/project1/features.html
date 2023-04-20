@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSE 160 / Assignment 1</title>
+
+    <link rel="stylesheet" href="../../style.css">
+
+    <title>Sketching 2D N-Sided Cylinders</title>
 </head>
 <body>
-    <h1>CSE 160 / Assignment 1 / Prog 1</h1>
+    <center><a href="../../index.html">Return To Previous Page</a></center>
+
+    <h1><u><i>Sketching 2D N-Sided Cylinders</i></u></h1>
     <p>
-        Ivan Martinez-Arias / ivalmart@ucsc.edu
+        Date: April 11, 2021
     </p>
-    <p>
-        PROG 1 / April 11 2021
-    </p>
+    <!-- LINKS -->
+    <p><h2><a href="./driver.html">Program / Driver</a></h2></p>
+
     <!-- DESCRIPTION -->
-    <h2>Description:</h2>
+    <h3>Description:</h3>
     <p>
         A program that utilizes VSHADERS, FSHADERS, and buffers in order to sketch out a cylinder polygon given 
-        the user input to calculate coordiantes. When the program runs and is given an N value input, it will
+        the user input to calculate coordiantes. When the program runs and is given a number value input, it will
         draw a 3D cylinder in a 2D perspective. Depending if the end caps are declared to be drawn by the checkbox
         on the webpage, the program will draw a cylinder either with or without end caps. 
     </p>
@@ -30,12 +35,9 @@
         of the polygon utilized VSHADERS and FSHADERS, along with calculations of the Unit Circle, in order to sketch
         out the skeleton of the polygon.
     </p>
-    <!-- LINKS -->
-    <h2>Links:</h2>
-    <p><a href="driver.html">Program / Driver</a></p>
-    <p><a href="asg1.js">Javascript / asg1.js</a></p>
+
     <!-- GUIDE TO USE PROGRAM -->
-    <h2>Guide to Use Program:</h2>
+    <h3>Guide to Use Program:</h3>
     <p>
         The user types in a number into the textbox to create a polygon that has N sides. Users can click on
         the checkbox next to the textbox to decide whether they want to have the end caps of the cylinders drawn
@@ -47,7 +49,7 @@
         box to save the contents of the coordinates or the polygons.
     </p>
     <!-- ISSUES -->
-    <h2>Issues:</h2>
+    <h3>Issues:</h3>
     <p>
         * A file cannot be saved if there is no output currently on the canvas. The user must draw something in order 
         for the contents to be saved.
@@ -58,17 +60,23 @@
         and must reinput N = 3 to save .poly.)
     </p>
     <!-- EXAMPLE OUTPUTS -->
-    <h2>Example Outputs:</h2>
+    <h3>Example Outputs:</h3>
+    <hr>
+    
     <p>N = 12 / End Caps = false</p>
-    <img src="cyli12noCap.PNG" alt="Cylinder12noCap" width="400" height="400">
+    <img src="../../images/program1/cyli12noCap.PNG" alt="Cylinder12noCap" width="400" height="500">
 
     <p>N = 5 / End Caps = true</p>
-    <img src="cyli5cap.PNG" alt="Cylinder5cap" width="400" height="400">
+    <img src="../../images/program1/cyli5cap.PNG" alt="Cylinder5cap" width="400" height="500">
 
     <p>N = 3 / End Caps = false</p>
-    <img src="cyli3noCap.PNG" alt="Cylinder3noCap" width="400" height="400">
+    <img src="../../images/program1/cyli3noCap.PNG" alt="Cylinder3noCap" width="400" height="500">
 
     <p>N = 17 / End Caps = true</p>
-    <img src="cyli17cap.PNG" alt="Cylinder17cap" width="400" height="400">
+    <img src="../../images/program1/cyli17cap.PNG" alt="Cylinder17cap" width="400" height="500">
+
+    <br><br>
+    <center><a href="../../index.html">Return To Previous Page</a></center>
+
 </body>
 </html>

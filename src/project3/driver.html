@@ -1,21 +1,21 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>PROG 3</title>
+        <title>PROGRAM // Different Shadings of Cylinders</title>
 
         <!-- Load external libs -->
-        <script src="lib/cuon-matrix-cse160.js"></script>
-        <script src="lib/cuon-utils.js"></script>
-        <script src="lib/webgl-debug.js"></script>
-        <script src="lib/webgl-utils.js"></script>
+        <script src="../../lib/cuon-matrix-cse160.js"></script>
+        <script src="../../lib/cuon-utils.js"></script>
+        <script src="../../lib/webgl-debug.js"></script>
+        <script src="../../lib/webgl-utils.js"></script>
 
         <!-- Load internal libs -->
-        <script src="models/model.js"></script>
-        <script src="models/sphere.js"></script>
-        <script src="models/cylinder.js"></script>
+        <script src="./models/model.js"></script>
+        <script src="./models/sphere.js"></script>
+        <script src="./models/cylinder.js"></script>
 
         <!-- Load main -->
-        <script src="asg3.js"></script>
+        <script src="./program.js"></script>
         
         <style>
             /* The switch - the box around the slider */
@@ -85,6 +85,9 @@
     </head>
 
     <body onload="main()">
+        <a href="./features.html">Return To Previous Page</a>
+        <br><br>
+
         <canvas id="canvas" width="400" height="400"></canvas>
 
         <!-- Create Cylinder -->
@@ -159,5 +162,8 @@
         x<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateX(this.value)"></input>
         y<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateY(this.value)"></input>
         z<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateZ(this.value)"></input>
+
+        <br><br><br>
+        <a href="./features.html">Return To Previous Page</a>
     </body>
 </html>

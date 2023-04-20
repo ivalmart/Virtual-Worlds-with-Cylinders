@@ -2,26 +2,29 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>ASG 2</title>
+        <title>PROGRAM // Drawing Simple-Shaded 3D Cylinders</title>
 
         <!-- Load external libs -->
-        <script src="lib/cuon-matrix-cse160.js"></script>
-        <script src="lib/cuon-utils.js"></script>
-        <script src="lib/webgl-debug.js"></script>
-        <script src="lib/webgl-utils.js"></script>
+        <script src="../../lib/cuon-matrix-cse160.js"></script>
+        <script src="../../lib/cuon-utils.js"></script>
+        <script src="../../lib/webgl-debug.js"></script>
+        <script src="../../lib/webgl-utils.js"></script>
 
         <!-- Load internal libs -->
-        <script src="models/model.js"></script>
-        <script src="models/cylinder.js"></script>
+        <script src="./models/model.js"></script>
+        <script src="./models/cylinder.js"></script>
+        <script src="./models/sphere.js"></script>
         <!--<script src="classmate_cylinder.js"></script>-->
-        <script src="models/sphere.js"></script>
 
         <!-- Load main -->
-        <!--<script src="asg2.js"></script>-->
-        <script src="asg2 _testWithAsg3.js"></script>
+        <!-- <script src="program.js"></script> -->
+        <script src="program2_testfor_project3.js"></script>
     </head>
 
     <body onload="main()">
+        <a href="./features.html">Return To Previous Page</a>
+        <br><br>
+
         <canvas id="canvas" width="400" height="400"></canvas>
 
         <!-- Create Cylinder -->
@@ -83,5 +86,7 @@
         y<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateY(this.value)"></input>
         z<input id="rotSlider" type="range" min="-100" max="100" oninput="pltTranslateZ(this.value)"></input>
 
+        <br><br><br>
+        <a href="./features.html">Return To Previous Page</a>
     </body>
 </html>

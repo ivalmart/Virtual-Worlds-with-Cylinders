@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Physics Sandbox</title>
+
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body>
+    <center><a href="../../index.html">Return To Previous Page</a></center>
+
+    <h1>AR Physics Sandbox</h1>
+    <p>
+        Ivan Martinez-Arias / ivalmart@ucsc.edu<br>
+        Alan Chen / alrichen@ucsc.edu
+    </p>
+    <p>
+        Date: June 6, 2021<br>
+        <img src="../../images/program5/projectIcon.jpg" width="100" height="100">
+    </p>
+    <!-- DESCRIPTION -->
+    <h2>Description:</h2>
+    <p>
+        An AR Sandbox experience through Android devices where users are able to create a small virtual world through their 
+        phone's camera and are able to create objects that have a physics engine. Created through BabylonJS, WEbXR and ARCore, 
+        users are given a program to manipulate cones, cylinders, cubes, and spheres. The world created contains objects with 
+        lighting and shadows, a reticle used as a cursor for the user to know where objects and effects take place, and a 
+        physics engine from BabylonJS to allow interactivity through created effects upon the objects in the world. 
+    </p>
+
+    <!-- REQUIREMENTS -->
+    <h2>Requirements:</h2>
+    <p>
+        <a href="https://developers.google.com/ar/devices#google_play_devices">Android Google Play</a><br>
+        <a href="https://developers.google.com/ar/devices#android_china">Android China</a><br>
+    </p>
+
+    <!-- LINKS -->
+    <h2>Links:</h2>
+    <p>
+        <a href="./index.html">Program / Driver</a><br>
+        <a href="https://avertec.github.io/ASG_5_BabylonJS/">Program / GitHub Pages</a><br>
+        <a href="./README.md">README</a>
+    </p>
+
+    <h2>Resources/Citations:</h2>
+    <p>
+        <a href="https://playground.babylonjs.com/#RFTC4B#47">Babylon JS UI with DOM</a><br>
+        <a href="https://doc.babylonjs.com/divingDeeper/webXR/introToWebXR">Babylon JS Intro to WebXR</a><br>
+        <a href="https://doc.babylonjs.com/divingDeeper/webXR/webXRARFeatures">Babylon JS WebXR AR Features</a><br>
+        <a href="https://doc.babylonjs.com/divingDeeper/physics/usingPhysicsEngine">Babylon JS Physics</a><br>
+        <a href="https://doc.babylonjs.com/divingDeeper/mesh/transforms/center_origin/ref_frame">Babylon JS Coordinate Transformation</a><br>
+        <a href="https://doc.babylonjs.com/divingDeeper/physics/usingPhysicsEngine#radial-explosion-impulseforce--gravitational-fields">Babylon JS Physics Engine</a><br>
+        <a href="https://playground.babylonjs.com/#UZHINX">Babylon JS Example of Physics Effects</a>
+        <a href="https://news.ucsc.edu/2011/09/banana-slugs-pop-culture-moments.html">Sammy the Slug Photo</a>
+    </p>
+
+    <!-- GUIDE TO RUN AND USE PROGRAM -->
+    <h2>Guide to Run Program:</h2>
+    <u>How to Run:</u>
+    <p>
+        The program MUST be running on a live host in order for it to function. There are two 
+        sources in which users can try out the AR program.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;1. GitHub Pages - Users must access the 
+        <a href="https://avertec.github.io/ASG_5_BabylonJS/">GitHub Pages</a> link through an Android device 
+        in order to get the AR Experience.<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;2. Apache Tomcat - Users are able to download the project folder in order to port 
+        forward the website to their Android device. Steps to download and run the program are as follows:<br>        
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Download <a href="https://tomcat.apache.org/download-10.cgi">Apache Tomcat</a> by going to the link and 
+            clicking on “32-bit/64-bit Windows Service Installer” on your PC<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Install Apache Tomcat and find it through Program Files (x86)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Go into Apache Software Foundation -> Tomcat 10.0 -> webapps -> ROOT<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Place the project folder into the ROOT folder<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Start the Apache Tomcat program<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Enable Developer Mode on the Android device and enable “USB Debugging”<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Open up Google Chrome on your PC and paste the following into a browser: <b>chrome://inspect/#devices</b><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Verify if Port Forwarding is enabled and active<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Plug in Android device into PC and open up Google Chrome on the Android device<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>Note:</b> To view the perspective of the phone on your PC, go to step (g) for the link and under the “Remote 
+            Target” title is where the Android device is. Click on “Inspect”<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            - Paste in the following on Google Chrome in the Port Forwarding page textbox: 
+            <b>http://localhost:8080/ASG_5_BabylonJS/index.html</b><br>
+    </p>
+    <h2>Opening the Program:</h2>
+    <p>
+        Once the program is up and running on an Android device, the user will see a colored background with buttons 
+        on each side providing different functionalities. To enter into AR Mode, tap on the bottom right icon 
+        <img src="../../images/program5/arIcon.jpg" width="40px" height="25px">.
+    </p>
+    <h2>Program Functionality:</h2>
+    <u>Physics Engine:</u>
+    <p>
+        The program has a physics engine depending on the orientation the program entered AR Mode. Objects can move around 
+        the world with collision given by the user. There are also two buttons that interact with the objects given force.<br>
+        <b>Note:</b> If the user does not create a ground object into the world, the object will fall out of the world and 
+        will disappear.
+    </p>
+    <u>Reticle:</u>
+    <p>
+        After the world has been generated, a green donut-shaped reticle will appear in the middle of the user's device. It 
+        acts as a cursor for the user to place down objects into the world, as well as interact with objects.
+    </p>
+    <u>Adding Objects:</u>
+    <p>
+        There are 5 buttons the user can use to create objects. The objects the user can create are: Balls/Spheres, Cubes, 
+        Cylinders, Cones, and Slug. When pressed, it drops down the selected object where the cursor is with a random color given 
+        onto the world. The "Place Slug" button instead drops down a cube of an image of Sammy the Slug.
+    </p>
+    <u>Adding Ground:</u>
+    <p>
+        There is a button "Create Ground" that creates a floor for the user to place down objects on. Depending on where the 
+        cursor is will create the ground.
+    </p>
+    <u>Generating an Explosion/Tornado:</u>
+    <p>
+        Two buttons "Create Explosion" and "Create Tornado" will generate physics in regards to the button created. Explosions 
+        scatter the objects in respect to where the reticle is. Tornados will cause a swirl of objects in respect to the reticle.<br>
+        <b>Note:</b> The tornado is very weak in terms of power when pressed. To generate a stronger tornado effect, user can tap 
+        the button multiple times.
+    </p>
+    <u>Resetting the World:</u>
+    <p>
+        When the "Reset Scene" button is pressed, it will remove all objects of the world to reset the scene to when the program was 
+        first opened. 
+    </p>
+
+    <!-- ISSUES -->
+    <h2>Issues:</h2>
+    <p>
+        - AR Mode on thr program will not work on PC/Desktop unless there is AR support or an AR emulator.<br>
+        - When opening the program and going into Landscape Mode on the device before activating AR Mode, the 
+        buttons will overlap each other and appear very large. The buttons will scale to the screen correctly 
+        once the user enters AR Mode.<br>
+        - Depending on when AR mode is activated in respect to Landscape Mode or Portrait Mode, the physics will 
+        only be oriented to when the scene was first created. Example: If the user starts the program on portrait mode 
+        and re-enters the program in landscape mode, the physics is bound to portrait mode and objects will fall sideways. 
+        - Buttons will seem streteched or squished when the user enters and exits out of AR mode multiple times. 
+        Refreshing the page will fix the issue.
+    </p>
+
+    <!-- OP-ED -->
+    <h2>Op-Ed:</h2>
+    <p>
+        Our experience of learning how to use AR was a bumpy ride. The minimal resources and documentations that we found were beneficial for 
+        the most part and it is what helped us get a footing into the project. There were very few resources and documented APIs
+        because most of the programs we were working with either had no support between each other and were 
+        a new and ongoing systems that were in development and not fully completed in terms of funtionality. 
+        <br>
+        We researched the programs we were originally going to use and realized how little documentation there was. Throughout our experience, 
+        we had to reduce the scope of our project from what we envisioned. Another factor is programs not being compatible with one another, 
+        thus having to adapt our project and visions to something else that provided us those resources. It made us realize that when approaching 
+        a new language/program, there might be no one to explain to us how things work efficiently and we would have to learn it ourselves. 
+        Since AR is still developing technology, there aren't many external resources such as books to understand more how to utilize AR programs.
+    </p>
+
+    <!-- EXAMPLE OUTPUT -->
+    <h2>Example of Program:</h2>
+    <hr>
+    <img src="../../images/program5/example1.jpg" width="200" height="400">
+    <img src="../../images/program5/example2.jpg" width="200" height="400">
+    <img src="../../images/program5/example3.jpg" width="200" height="400">
+
+    <br><br><br>
+    <center><a href="../../index.html">Return To Previous Page</a></center>
+
+</body>
+</html>

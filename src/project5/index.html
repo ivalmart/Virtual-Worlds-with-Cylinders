@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>CSE 160 / ASG 5 AR Experience</title>
+
+        <!-- Babylon.js -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/ammo.js"></script>
+        <script src="https://preview.babylonjs.com/cannon.js"></script>
+        <script src="https://preview.babylonjs.com/Oimo.js"></script>
+        <script src="https://preview.babylonjs.com/earcut.min.js"></script>
+        <script src="https://preview.babylonjs.com/babylon.js"></script>
+        <script src="https://preview.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+        <script src="https://preview.babylonjs.com/proceduralTexturesLibrary/babylonjs.proceduralTextures.min.js"></script>
+        <script src="https://preview.babylonjs.com/postProcessesLibrary/babylonjs.postProcess.min.js"></script>
+        <script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
+        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+        <script src="https://preview.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="https://preview.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
+        <script src="https://preview.babylonjs.com/babylonjs.loaders.js"></script>
+        <script src="https://preview.babylonjs.com/babylonjs.loaders.min.js"></script>
+
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+    </head>
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        var canvas = document.getElementById("renderCanvas");
+
+        var engine = null;
+        var scene = null;
+        var sceneToRender = null;
+        var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
+        
+        var createScene = async function () {
+        
+            var scene = new BABYLON.Scene(engine);
+            var gravityVector = new BABYLON.Vector3(0,-9.81, 0);
+            var physicsPlugin = new BABYLON.CannonJSPlugin();
+            scene.enablePhysics(gravityVector, physicsPlugin);
+            var physicsHelper = new BABYLON.PhysicsHelper(scene);
+            var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
+            camera.setTarget(BABYLON.Vector3.Zero());
+            camera.attachControl(canvas, true);
+
+            var light2 = new BABYLON.DirectionalLight("light2", new BABYLON.Vector3(-1, -1, 0), scene);
+            light2.intensity = 1.0;
+            light2.position = new BABYLON.Vector3(80,40,80);
+            var shadowGenerator = new BABYLON.ShadowGenerator(256, light2);
+            shadowGenerator.setDarkness(0.5);
+
+            const xr = await scene.createDefaultXRExperienceAsync({
+                uiOptions: {
+                    sessionMode: 'immersive-ar',
+                    referenceSpaceType: "unbounded",
+                },
+                optionalFeatures: ["hit-test", "anchors"],
+            });
+
+            var advancedTexture = BABYLON.GUI.AdvancedDynamicTexture.CreateFullscreenUI("UI");
+            
+            // right side
+            var placeBall = BABYLON.GUI.Button.CreateSimpleButton("placeBall", "Place Ball");
+            placeBall.width = "200px";
+            placeBall.height = "100px";
+            placeBall.fontSize = "30px";
+            placeBall.color = "white";
+            placeBall.cornerRadius = 20;
+            placeBall.background = "green";
+            placeBall.top = "-15%";
+            placeBall.left = "40%";
+            advancedTexture.addControl(placeBall);
+
+            var placeCube = BABYLON.GUI.Button.CreateSimpleButton("placeCube", "Place Cube");
+            placeCube.width = "200px";
+            placeCube.height = "100px";
+            placeCube.fontSize = "30px";
+            placeCube.color = "white";
+            placeCube.cornerRadius = 20;
+            placeCube.background = "green";
+            placeCube.top = "-5%";
+            placeCube.left = "40%";
+            advancedTexture.addControl(placeCube);
+
+            var placeCylinder = BABYLON.GUI.Button.CreateSimpleButton("placeCylinder", "Place Cylinder");
+            placeCylinder.width = "200px";
+            placeCylinder.height = "100px";
+            placeCylinder.fontSize = "30px";
+            placeCylinder.color = "white";
+            placeCylinder.cornerRadius = 20;
+            placeCylinder.background = "green";
+            placeCylinder.top = "5%";
+            placeCylinder.left = "40%";
+            advancedTexture.addControl(placeCylinder);
+
+            var placeCone = BABYLON.GUI.Button.CreateSimpleButton("placeCone", "Place Cone");
+            placeCone.width = "200px";
+            placeCone.height = "100px";
+            placeCone.fontSize = "30px";
+            placeCone.color = "white";
+            placeCone.cornerRadius = 20;
+            placeCone.background = "green";
+            placeCone.top = "15%";
+            placeCone.left = "40%";
+            advancedTexture.addControl(placeCone);
+
+            var placeSlug = BABYLON.GUI.Button.CreateSimpleButton("placeSlug", "Place Slug");
+            placeSlug.width = "200px";
+            placeSlug.height = "100px";
+            placeSlug.fontSize = "30px";
+            placeSlug.color = "blue";
+            placeSlug.cornerRadius = 20;
+            placeSlug.background = "yellow";
+            placeSlug.top = "25%";
+            placeSlug.left = "40%";
+            advancedTexture.addControl(placeSlug);
+
+            // left side
+            var placeGrnd = BABYLON.GUI.Button.CreateSimpleButton("placeGrnd", "Create Ground");
+            placeGrnd.width = "200px";
+            placeGrnd.height = "100px";
+            placeGrnd.fontSize = "30px";
+            placeGrnd.color = "white";
+            placeGrnd.cornerRadius = 20;
+            placeGrnd.background = "purple";
+            placeGrnd.top = "-15%";
+            placeGrnd.left = "-40%";
+            advancedTexture.addControl(placeGrnd);
+
+            var placeExplosion = BABYLON.GUI.Button.CreateSimpleButton("placeExplosion", "Create Explosion");
+            placeExplosion.width = "200px";
+            placeExplosion.height = "100px";
+            placeExplosion.fontSize = "30px";
+            placeExplosion.color = "white";
+            placeExplosion.cornerRadius = 20;
+            placeExplosion.background = "#800020";
+            placeExplosion.top = "-5%";
+            placeExplosion.left = "-40%";
+            advancedTexture.addControl(placeExplosion);
+
+            var placeTornado = BABYLON.GUI.Button.CreateSimpleButton("placeTornado", "Create Tornado");
+            placeTornado.width = "200px";
+            placeTornado.height = "100px";
+            placeTornado.fontSize = "30px";
+            placeTornado.color = "white";
+            placeTornado.cornerRadius = 20;
+            placeTornado.background = "#800020";
+            placeTornado.top = "5%";
+            placeTornado.left = "-40%";
+            advancedTexture.addControl(placeTornado);
+
+            var resetBtn = BABYLON.GUI.Button.CreateSimpleButton("resetBtn", "Reset Scene");
+            resetBtn.width = "200px";
+            resetBtn.height = "100px";
+            resetBtn.fontSize = "30px";
+            resetBtn.color = "white";
+            resetBtn.cornerRadius = 20;
+            resetBtn.background = "purple";
+            resetBtn.top = "15%";
+            resetBtn.left = "-40%";
+            advancedTexture.addControl(resetBtn);
+
+            
+
+
+            //marker
+            const marker = BABYLON.MeshBuilder.CreateTorus('marker', { diameter: 0.15, thickness: 0.05 });
+            marker.isVisible = false;
+            marker.rotationQuaternion = new BABYLON.Quaternion();
+
+            let markerMat = new BABYLON.StandardMaterial("markerMat", scene);
+            markerMat.diffuseColor = new BABYLON.Color3.Green();
+            marker.material = markerMat;
+
+
+            const fm = xr.baseExperience.featuresManager;
+            const xrTest = fm.enableFeature(BABYLON.WebXRHitTest, "latest", {
+                enableTransientHitTest: false
+            });
+            const anchors = fm.enableFeature(BABYLON.WebXRAnchorSystem, 'latest');
+            const xrBackgroundRemover = fm.enableFeature(BABYLON.WebXRBackgroundRemover.Name);
+            
+            var hitTest;
+            
+
+            xrTest.onHitTestResultObservable.add((results) => {
+                if (results.length) {
+                    hitTest = results[0];
+                    marker.isVisible = true;
+                    hitTest.transformationMatrix.decompose(marker.scaling, marker.rotationQuaternion, marker.position);
+                } else {
+                    hitTest = undefined;
+                    marker.isVisible = false;
+                }
+            });
+
+            placeGrnd.onPointerUpObservable.add(function() {
+                // place the physics ground for objects to interact with
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator,  physicsHelper, hitTest, anchors, "ground");
+                }
+            });
+
+            placeBall.onPointerUpObservable.add(function() {
+                // place a ball
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, "ball");
+                }
+            });
+
+            placeCube.onPointerUpObservable.add(function() {
+                // place a cube 
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator,  physicsHelper, hitTest, anchors, "cube");
+                }
+            });
+
+            placeCylinder.onPointerUpObservable.add(function () {
+                // place a cylinder
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, "cylinder");
+                }
+            });
+
+            placeCone.onPointerUpObservable.add(function () {
+                // place a cone
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, "cone");
+                }
+            });
+
+            placeExplosion.onPointerUpObservable.add(function() {
+                // place explosion
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, "explosion");
+                }
+            });
+
+            placeTornado.onPointerUpObservable.add(function() {
+                // place tornado
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, "tornado");
+                }
+            });
+
+            resetBtn.onPointerUpObservable.add(function() {
+                // clear scene
+                clearScene(anchors, scene);
+            });
+
+            placeSlug.onPointerUpObservable.add(function() {
+                if (hitTest && anchors && xr.baseExperience.state === BABYLON.WebXRState.IN_XR) {
+                    addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, "slug");
+                }
+            });
+  
+            return scene;
+        };
+        window.initFunction = async function () {
+                var asyncEngineCreation = async function () {
+                    try {
+                        return createDefaultEngine();
+                    } catch (e) {
+                        console.log("the available createEngine function failed. Creating the default engine instead");
+                        return createDefaultEngine();
+                    }
+                }
+
+                window.engine = await asyncEngineCreation();
+                if (!engine) throw 'engine should not be null.';
+                window.scene = createScene();
+            };
+            initFunction().then(() => {
+                scene.then(returnedScene => { sceneToRender = returnedScene; });
+
+                engine.runRenderLoop(function () {
+                    if (sceneToRender && sceneToRender.activeCamera) {
+                        sceneToRender.render();
+                    }
+                });
+            });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+
+        function addObject(scene, shadowGenerator, physicsHelper, hitTest, anchors, type) {
+            if (type == "ball") {
+                let sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {segments: 16, diameter: 0.2});
+                var sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial");
+                sphereMaterial.diffuseColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
+                sphere.material = sphereMaterial;
+                hitTest.transformationMatrix.decompose(sphere.scaling, sphere.rotationQuaternion, sphere.position);
+                sphere.position.y = 1;
+                sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, friction: 0.2, restitution: 0.3 });        
+                shadowGenerator.addShadowCaster(sphere);
+                shadowGenerator.getShadowMap().renderList.push(sphere);
+                sphere.recieveShadows = true;
+            }
+
+            if (type == "cube") {
+                let cube = BABYLON.MeshBuilder.CreateBox("box", {size: 0.2});
+                var cubeMat = new BABYLON.StandardMaterial("sphereMaterial");
+                cubeMat.diffuseColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
+                cube.material = cubeMat;
+                hitTest.transformationMatrix.decompose(cube.scaling, cube.rotationQuaternion, cube.position);
+                cube.position.y = 1;
+                cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, friction: 0.2, restitution: 0.3 });        
+                shadowGenerator.addShadowCaster(cube);
+                shadowGenerator.getShadowMap().renderList.push(cube);
+                cube.recieveShadows = true;
+            }
+
+            if(type == "cylinder") {
+                let cylinder = BABYLON.MeshBuilder.CreateCylinder("cylinder", { height: 0.2, diameter: 0.2});
+                var cylinderMaterial = new BABYLON.StandardMaterial("speherMaterial");
+                cylinderMaterial.diffuseColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
+                cylinder.material = cylinderMaterial;
+                hitTest.transformationMatrix.decompose(cylinder.scaling, cylinder.rotationQuaternion, cylinder.position);
+                cylinder.position.y = 1;
+                cylinder.physicsImpostor = new BABYLON.PhysicsImpostor(cylinder, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 1, friction: 0.2, restitution: 0.3 });        
+                shadowGenerator.addShadowCaster(cylinder);
+                shadowGenerator.getShadowMap().renderList.push(cylinder);
+                cylinder.recieveShadows = true;
+            }
+
+            if(type == "cone") {
+                let cone = BABYLON.MeshBuilder.CreateCylinder("cone", { height: 0.2, diameterTop: 0, diameterBottom: 0.2});
+                var coneMaterial = new BABYLON.StandardMaterial("speherMaterial");
+                coneMaterial.diffuseColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
+                cone.material = coneMaterial;
+                hitTest.transformationMatrix.decompose(cone.scaling, cone.rotationQuaternion, cone.position);
+                cone.position.y = 1;
+                cone.physicsImpostor = new BABYLON.PhysicsImpostor(cone, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 1, friction: 0.2, restitution: 0.3 });        
+                shadowGenerator.addShadowCaster(cone);
+                shadowGenerator.getShadowMap().renderList.push(cone);
+                cone.recieveShadows = true;
+            }
+
+            if (type == "ground") {
+                anchors.addAnchorPointUsingHitTestResultAsync(hitTest);
+                //  spawn ground at anchor first before doing anything
+                var ground = new BABYLON.MeshBuilder.CreateBox("ground", { height: 1, width: 4, depth: 4 });
+                const groundMat = new BABYLON.StandardMaterial("groundMat");
+                groundMat.diffuseColor = new BABYLON.Color3.Gray();
+                ground.material = groundMat;
+                ground.setPivotMatrix(new BABYLON.Matrix.Translation(0, -0.5, 0), false);
+                ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, friction: 0.8, restitution: 0.7 });
+                shadowGenerator.addShadowCaster(ground);
+                shadowGenerator.getShadowMap().renderList.push(ground);
+                ground.recieveShadows = true;
+                anchors.onAnchorAddedObservable.add((anchor) => {
+                    anchor.attachedNode = ground;
+                })
+            }
+
+            if(type == "slug") {
+                let cube = BABYLON.MeshBuilder.CreateBox("box", {size: 0.3});
+                var cubeMat = new BABYLON.StandardMaterial("cubeMat");
+                cubeMat.diffuseTexture = new BABYLON.Texture("textures/sammysmallface350.jpg");
+                cubeMat.specularTexture = new BABYLON.Texture("textures/sammysmallface350.jpg");
+                cubeMat.ambientTexture = new BABYLON.Texture("textures/sammysmallface350.jpg");
+                cube.material = cubeMat;
+                hitTest.transformationMatrix.decompose(cube.scaling, cube.rotationQuaternion, cube.position);
+                cube.position.y = 1;
+                cube.physicsImpostor = new BABYLON.PhysicsImpostor(cube, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 1, friction: 0.2, restitution: 0.3 });        
+                shadowGenerator.addShadowCaster(cube);
+                shadowGenerator.getShadowMap().renderList.push(cube);
+                cube.recieveShadows = true;
+                
+
+            }
+
+            if (type == "explosion") {
+                let sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {segments: 16, diameter: 0.5});
+                var sphereMaterial = new BABYLON.StandardMaterial("sphereMaterial");
+                sphereMaterial.diffuseColor = new BABYLON.Color3.Red();
+                sphereMaterial.wireframe = true;
+                sphere.material = sphereMaterial;
+                hitTest.transformationMatrix.decompose(sphere.scaling, sphere.rotationQuaternion, sphere.position);
+                var origin = sphere.position;
+                var explosionEvent = physicsHelper.applyRadialExplosionImpulse( 
+                    origin, {
+                    radius: 1,
+                    strength: 50,
+                    falloff:BABYLON.PhysicsRadialImpulseFalloff.Linear
+                    }
+                );
+                sphere.dispose();
+            }
+
+            if (type == "tornado") {
+                let box = BABYLON.MeshBuilder.CreateBox("Box", {size: 1});
+                hitTest.transformationMatrix.decompose(box.scaling, box.rotationQuaternion, box.position);
+                box.position.y = -2;
+                box.isVisible = false;
+                var origin = box.position;
+                var updraftEvent = physicsHelper.updraft(
+                    origin,
+                    {
+                        radius: 0.5,
+                        strength: 5,
+                        height: 2,
+                    }
+                );
+                updraftEvent.enable();
+                
+                var vortexEvent = physicsHelper.vortex(
+                    origin,
+                    {
+                        radius: 0.5,
+                        strength: 2,
+                        height: 2,
+                    }
+                );
+                vortexEvent.enable();
+                setTimeout(function() {
+                        box.dispose();
+                        updraftEvent.disable();
+                        vortexEvent.disable();
+                },5000); 
+            }
+        }
+        
+        function clearScene(anchors, scene) {
+            let objectTypes = ["box", "cone", "cylinder", "ground", "sphere"];
+           
+            let objCount = 0;
+            for (let i = 0; i < scene.meshes.length; i++) {
+                var mesh = scene.meshes[i];
+                for(let i = 0; i < objectTypes.length; i++)
+                {
+                    if (mesh.name == objectTypes[i]) {
+                        objCount++;
+                    }
+                }
+            }
+            let index = 0;
+            let deletedNum = 0;
+            while(objCount>0) {
+                var mesh = scene.meshes[index];
+                
+                for(let x = 0; x < objectTypes.length; x++)
+                {
+                    if (mesh.name == objectTypes[x]) {
+                        scene.meshes[index].dispose();
+                        index--;
+                        deletedNum++;
+                        objCount--;
+                    }
+                }
+                index++;
+            }
+        }
+
+        function printObjects(scene) {
+            console.log("meshes contains:");
+            for (let i = 0; i < scene.meshes.length; i++)
+            {
+                var mesh = scene.meshes[i];
+                console.log("i:", i, " ", mesh.name);
+            }
+        }
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+h2 {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+body {
+    background-image: url('./images/background-onebutton.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: white;
+}
+
+a {
+    color:blue;
+}
